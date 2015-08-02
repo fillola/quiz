@@ -23,7 +23,7 @@ exports.load = function(req, res, next, quizId) {
 
 // GET quizes/index
 exports.index = function(req, res) {
-  model.Quiz.findAll().then(function(quizes){
+  model.Quiz.findAll({where: ["pregunta like ?", search]}).then(function(quizes){
     res.render('quizes/index.ejs', { quizes: quizes });
   }).catch(function(error) {next(error);});
  
@@ -45,7 +45,6 @@ exports.answer = function(req, res) {
       res.render('quizes/answer', {quiz: req.quiz, respuesta: 'Incorrecto' });
     }  
   })
-  
 };
 
 // GET quizes/quizes
@@ -58,5 +57,5 @@ exports.question = function(req, res) {
       res.render('quizes/answer', { respuesta: 'Incorrecto' });
     }
   })
-  
 };
+
