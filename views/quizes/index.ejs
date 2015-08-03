@@ -1,16 +1,13 @@
-<form method="get" action="/quizes" >
-  Introduce texto de búsqueda</p>
-  <input type="text" name="search" value="Texto_a_buscar" />
-  <input type="submit" value="Enviar" />
-</form>
-
+<div>
+<center>
 <table>
-  <% var i; for (i=0;i < quizes.length; i++){%> 
+  <% var i; for (i=0;i < quizes.length; i++){%>
     <tr>
-      <td> <a href="quizes/<%= quizes[i].id %>"> <%= quizes[i].pregunta %> </a> </td>
-      <td> <a href="quizes/<%= quizes[i].id %>/edit"> <button>editar</button> </a> </td>
+      <td><a href="/quizes/<%= quizes[i].id %>"> <%= quizes[i].pregunta %> </a> </td>
+      <td> <%= quizes[i].tema %> </td>    
+      <td> <a href="/quizes/<%= quizes[i].id %>/edit"> <button>editar</button> </a> </td>
       <td> 
-        <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete" >          
+        <form method="post" action="/quizes/<%= quizes[i].id %>?_method=delete" >          
           <button type="submit" onClick="return confirm('Borrar: <%= quizes[i].pregunta %>');" >
             borrar
           </button>
@@ -19,4 +16,16 @@
     </tr>
   <%}%> 
 </table>
-<a href="quizes/new"> <button type="button" > Crear pregunta </button> </a>
+</center>
+</div>
+<div>
+<form method="get" action="/quizes/?">
+  Introduzca criterio de busqueda: 
+  <input type="text" name="search" value=""/>
+  <input type="submit" value="Enviar" />
+</form>
+</div>
+<div>
+Pulse para crear preguntas nuevas: 
+<a href="/quizes/new"> <button type="button" > Crear pregunta </button> </a>
+</div>
