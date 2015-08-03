@@ -1,4 +1,11 @@
 <div>
+<form method="get" action="/quizes/?">
+  Introduzca criterio de busqueda: 
+  <input type="text" name="search" value=""/>
+  <input type="submit" value="Enviar" />
+</form>
+</div>
+<div>
 <center>
 <table>
   <% var i; for (i=0;i < quizes.length; i++){%>
@@ -18,13 +25,7 @@
 </table>
 </center>
 </div>
-<div>
-<form method="get" action="/quizes/?">
-  Introduzca criterio de busqueda: 
-  <input type="text" name="search" value=""/>
-  <input type="submit" value="Enviar" />
-</form>
-</div>
+
 <div>
 Pulse para crear preguntas nuevas: 
 <a href="/quizes/new"> <button type="button" > Crear pregunta </button> </a>
