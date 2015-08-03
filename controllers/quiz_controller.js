@@ -77,20 +77,21 @@ exports.new = function(req, res) {
 // GET quizes/create
 exports.create = function(req, res) {
   var quiz = model.Quiz.build(req.body.quiz);
-  quiz
-  .validate()
-  .then(
-    function(err){
-      if(err){
-        res.redirect('/quizes/new', {quiz: quiz, errors: err.errors});
-      } else {
+  console.log("quiz.pregunta[" + quiz.pregunta+  "]   quiz.respuesta[" + quiz.respuesta + "]   quiz.tema[" +quiz.tema+"]"); 
+// quiz
+//  .validate()
+//  .then(
+//    function(err){
+//      if(err){
+//        res.redirect('/quizes/new', {quiz: quiz, errors: err.errors});
+//      } else {
       	//guarda en DB los campos pregunta y respuesta de quiz
       	quiz.save({fields: ["pregunta", "respuesta", "tema"]}).then(function(){
       		res.redirect('/quizes');
       	}) //Redireccion HTTP (URL Relativo) lista de preguntas    
-      }
-    }
-  );
+//      }
+//    }
+//  );
 };
 
 // GET quizes/edit
@@ -105,20 +106,21 @@ exports.update = function(req, res) {
   req.quiz.respuesta = req.body.quiz.respuesta;
   req.quiz.tema = req.body.quiz.tema;
 
-  req.quiz.validate()
-    .then(
-      function(err){
-        if(err){
-          res.redirect('/quizes/edit', {quiz: req.quiz, errors: err.errors});
-        } else {
+  console.log("req.quiz.pregunta[" + req.quiz.pregunta+  "]   req.quiz.respuesta[" + req.quiz.respuesta + "]   req.quiz.tema[" +req.quiz.tema+"]");
+//  req.quiz.validate()
+//    .then(
+//      function(err){
+//        if(err){
+//          res.redirect('/quizes/edit', {quiz: req.quiz, errors: err.errors});
+//        } else {
           req.quiz
         	//guarda en DB los campos pregunta y respuesta de quiz
         	.save({fields: ["pregunta", "respuesta", "tema"]}).then(function(){
         		res.redirect('/quizes');
         	}) //Redireccion HTTP (URL Relativo) lista de preguntas    
-        }
-      }
-    );
+//        }
+//      }
+//    );
 };
 
 // GET quizes/edit
