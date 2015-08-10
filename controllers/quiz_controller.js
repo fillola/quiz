@@ -4,7 +4,7 @@ var model = require('../models/models.js');
 exports.load = function(req, res, next, quizId) {
   model.Quiz.find({
                   where: {id: Number(quizId)},
-                  include: [{model: models.Comment}]
+                  include: [{ model: model.Comment }]
                   }).then(
     function(quiz){
       if(quiz){
