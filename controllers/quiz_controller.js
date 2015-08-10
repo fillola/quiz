@@ -1,15 +1,11 @@
 var model = require('../models/models.js');
 
-// GET quizes/question
-//exports.question = function(req, res) {
-//  model.Quiz.findAll().success(function(quiz){
-//    res.render('quizes/question', { pregunta: quiz[0].pregunta});  
-//  })  
-//};
-
 // GET quizes/index
 exports.load = function(req, res, next, quizId) {
-  model.Quiz.find(quizId).then(
+  model.Quiz.find({
+                  where: {id: Number(quizId)},
+                  include: [{model: models.Comment}]
+                  }).then(
     function(quiz){
       if(quiz){
         req.quiz = quiz;
