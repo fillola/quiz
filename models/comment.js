@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     'Comment', 
     { texto: {
         type: DataTypes.STRING,
-        validate: {notEmpty: {msg: "--> Falta Pregunta"}}
+        validate: {notEmpty: {msg: "--> Falta Texto"}}
       }                               
     }
     ); 
