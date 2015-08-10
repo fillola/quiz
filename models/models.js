@@ -28,8 +28,13 @@ var sequelize = new Sequelize(DB_name,user,pwd,
 						
 //Importar la definicion de la tabla Quiz en quiz.js
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
+var Comment = sequelize.import(path.join(__dirname,'comment'));
+
+Comment.belongsTo(Quiz); //indica que un comment pertenece a un quiz.
+Quiz.hasMany(Comment);  //indica que un quiz puede tener muchos comments.
 
 exports.Quiz = Quiz; // exportar definición de tabla Quiz
+exports.Comment = Comment; // exportar definición de tabla Comment
 
 //sequelize.sync() crea e inicializa tabla de preguntas en DB
 sequelize.sync().then(function(){
@@ -47,4 +52,18 @@ sequelize.sync().then(function(){
 			.then(function(){console.log('Base de datos inicializada con tema')});
 		};
 	});
+  
+	Comment.count().then(function(count){
+		if(count===0){ //la tabla se inicializa sólo si esta vacía
+			Comment.create({ pregunta: 'Capital de Italia',
+						  respuesta: 'Roma',
+						  tema: 'humanidades'
+						  });
+			Comment.create({ pregunta: 'Capital de Portugal',
+						  respuesta: 'Lisboa',
+						  tema: 'humanidades'
+						  })
+			.then(function(){console.log('Base de datos inicializada con tema')});
+		};
+	});  
 });
