@@ -33,8 +33,10 @@ app.use(function(req, res, next) {
   if (!req.session.redir) {
     req.session.redir = '/';
   }
+
+  var patron = new RegExp(/\/login|\/logout); 
   // guardar path en session.redir para despues de login
-  if (!req.path.match(/\/login|\/logout)) {
+  if (!req.path.match(patron)) {
     req.session.redir = req.path;
   }
 
