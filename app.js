@@ -37,6 +37,24 @@ app.use(function(req, res, next) {
 	next();
 });
 
+app.use(function(req, res, next) {
+	if(req.session.user){
+		var dosMinutos = 120000; // 2 minutos en milisegundos
+		var tiempoSession = new Date();
+		var tiempoAhora = new Date();
+		if(req.session.reloj){
+			tiempoSession = new Date(req.session.reloj);
+		}
+		diferencia = Math.ceil(tiempoAhora.getTime() - tiempoSession.getTime());
+		req.session.reloj = tiempoAhora.getTime();
+		if(diferencia > dosMinutos){
+			res.locals.session = req.session;
+			res.redirect("/logout");
+		}		
+	}
+	next();
+});
+
 app.use('/', routes);
 
 
