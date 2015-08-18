@@ -19,7 +19,7 @@ router.param('quizId', quizController.load);
 router.param('commentId', commentController.load);  // autoload :commentId  
 
 // Definición de rutas de session
-router.get('/login)', sessionController.new);
+router.get('/login', sessionController.new);
 router.post('/login', sessionController.create);
 router.get('/logout', sessionController.destroy);
 
